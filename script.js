@@ -25,22 +25,25 @@ async function getSearchResult() {
     try {
         const response = await fetch(`https://api.lyrics.ovh/suggest/${searchInput.value}`);
         const result = await response.json();
-        console.log(result.data[0]);
 
         if(result.data.length !== 0){
-            const singleResult = result.data.slice(0, 10).map(song => `
+            const singleItem = result.data.slice(0, 10).map(song => `
                 <div class="single-result row align-items-center my-3 p-3">
                     <div class="col-md-9">
                         <img src="${song.album.cover}" class="img-fluid float-left mr-3" alt="cover-img">
-                        <h4 class="mb-3">
-                            <span class="badge badge-pill badge-info">Album</span>
+                        <h4 class="mb-2">
+                            <span class="badge badge-info">Title</span>
                             ${song.title}
                         </h4>
-                        <p>
-                            <span class="badge badge-pill badge-light mb-3">Artist</span>
+                        <h6 class="mb-2">
+                            <span class="badge badge-primary">Album</span>
+                            <span>${song.album.title}</span>
+                        </h6>
+                        <h6 class="mb-2">
+                            <span class="badge badge-pill badge-light">Artist</span>
                             <span>${song.artist.name}</span> 
-                            <br>Duration: ${Math.floor(song.duration/60)}m ${song.duration%60}s
-                        </p>
+                        </h6>
+                        <p>Duration: ${Math.floor(song.duration/60)}m ${song.duration%60}s</p>
                     </div>
                     <div class="col-md-3 text-md-right text-center">
                         <button data-title="${song.title}" data-artist="${song.artist.name}" onClick="getLyrics()" class="btn btn-success">Get Lyrics</button>
@@ -48,7 +51,7 @@ async function getSearchResult() {
                 </div>  
             `).join('');
 
-            searchResult.innerHTML = singleResult;
+            searchResult.innerHTML = singleItem;
             songInfo.style.display = "none";
         }  
         else {
@@ -61,7 +64,6 @@ async function getSearchResult() {
         songInfo.style.display = "none";
     }
 }
-
 
 // get lyrics button event handler function
 async function getLyrics() {
