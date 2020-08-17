@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -46,25 +46,17 @@
             <div class="search-bar col-md-6 mx-auto">
                 <h1 class="text-center">Lyrics Search</h1>
                 <div class="search-box my-5">
-                    <input type="text" class="form-control" placeholder="Enter your artist song name">
-                    <button class="btn btn-success search-btn">Search</button>
+                    <input id="search-term" type="text" class="form-control" placeholder="Enter your artist song name">
+                    <button id="search-btn" class="btn btn-success search-btn">Search</button>
                 </div>
             </div>
-            <!-- === Simple results === -->
-            <div class="d-flex justify-content-center">
-                <div class="">
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                </div>
-            </div>
+            <!-- === Fancy results === -->
+            <div id="search-result" class="search-result col-md-8 mx-auto py-4"></div>
             <!-- Single Lyrics -->
             <div class="single-lyrics text-center">
                 <button class="btn go-back">&lsaquo;</button>
-                <h2 class="text-success mb-4">Pentatonix - Na Na Na</h2>
-                <pre class="lyric text-white">
+                <h2 id="song-title" class="text-success mb-4">Pentatonix - Na Na Na</h2>
+                <pre id="song-lyric" class="lyric text-white">
     Wont go whistling like the wind blows,
     Looking out my window,
     Just to see the shine
@@ -161,52 +153,8 @@
                 </pre>
             </div>
             <!-- === Fancy results === -->
-            <div class="search-result col-md-8 mx-auto py-4">
-                <!-- single result -->
-                <div class="single-result row align-items-center my-3 p-3">
-                    <div class="col-md-9">
-                        <h3 class="lyrics-name">Purple Noon</h3>
-                        <p class="author lead">Album by <span>Washed Out</span></p>
-                    </div>
-                    <div class="col-md-3 text-md-right text-center">
-                        <button class="btn btn-success">Get Lyrics</button>
-                    </div>
-                </div>
-                <!-- ./ single result -->
-
-                <!-- single result -->
-                <div class="single-result row align-items-center my-3 p-3">
-                    <div class="col-md-9">
-                        <h3 class="lyrics-name">Purple Noon</h3>
-                        <p class="author lead">Album by <span>Washed Out</span></p>
-                    </div>
-                    <div class="col-md-3 text-md-right text-center">
-                        <button class="btn btn-success">Get Lyrics</button>
-                    </div>
-                </div>
-                <!-- ./ single result -->
-                <!-- single result -->
-                <div class="single-result row align-items-center my-3 p-3">
-                    <div class="col-md-9">
-                        <h3 class="lyrics-name">Purple Noon</h3>
-                        <p class="author lead">Album by <span>Washed Out</span></p>
-                    </div>
-                    <div class="col-md-3 text-md-right text-center">
-                        <button class="btn btn-success">Get Lyrics</button>
-                    </div>
-                </div>
-                <!-- ./ single result -->
-                <!-- single result -->
-                <div class="single-result row align-items-center my-3 p-3">
-                    <div class="col-md-9">
-                        <h3 class="lyrics-name">Purple Noon</h3>
-                        <p class="author lead">Album by <span>Washed Out</span></p>
-                    </div>
-                    <div class="col-md-3 text-md-right text-center">
-                        <button class="btn btn-success">Get Lyrics</button>
-                    </div>
-                </div>
-                <!-- ./ single result -->
+            <div id="search-result" class="search-result col-md-8 mx-auto py-4">
+                
             </div>
 
 
@@ -220,6 +168,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Custom Script Here -->
+    <script src="script.js"></script>
 
 </body>
 
