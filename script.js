@@ -50,18 +50,22 @@ async function getSearchResult() {
                 </div>  
             `).join('');
 
-            searchResult.innerHTML = singleItem;
-            songInfo.style.display = "none";
+            changeProperty(singleItem, '', "none");
         }  
         else {
-            searchError.innerText = 'No Search Result Found';
-            songInfo.style.display = "none"; 
+            changeProperty('', 'No Search Result Found', "none");
         }
     }
     catch {
-        searchError.innerText = "No Search Results Found";
-        songInfo.style.display = "none";
+        changeProperty('', "No Search Results Found", "none");
     }
+}
+
+function changeProperty(result, error, display) {
+    searchResult.innerHTML = result;
+    searchError.innerText = error;
+    searchInput.value = ''; 
+    songInfo.style.display = display;
 }
 
 // get lyrics button event handler function
