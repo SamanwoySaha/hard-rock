@@ -20,38 +20,56 @@ function showSearchResults() {
 }
 
 async function getSearchResult() {
-    const response = await fetch(`https://api.lyrics.ovh/suggest/${searchInput.value}`);
-    const result = await response.json();
+    try {
+        const response = await fetch(`https://api.lyrics.ovh/suggest/${searchInput.value}`);
+        const result = await response.json();
+        console.log(result.data.length);
 
-    const singleResult = result.data.slice(0, 10).map(song => `
-        <div class="single-result row align-items-center my-3 p-3">
-            <div class="col-md-9">
-                <h3 class="lyrics-name">${song.title}</h3>
-                <p class="author lead">Album by <span>${song.artist.name}</span></p>
-            </div>
-            <div class="col-md-3 text-md-right text-center">
-                <button data-title="${song.title}" data-artist="${song.artist.name}" onClick="showLyrics()" class="btn btn-success">Get Lyrics</button>
-            </div>
-        </div>  
-    `).join('');
+        if(result.data.length !== 0){
+            const singleResult = result.data.slice(0, 10).map(song => `
+                <div class="single-result row align-items-center my-3 p-3">
+                    <div class="col-md-9">
+                        <h3 class="lyrics-name">${song.title}</h3>
+                        <p class="author lead">Album by <span>${song.artist.name}</span></p>
+                    </div>
+                    <div class="col-md-3 text-md-right text-center">
+                        <button data-title="${song.title}" data-artist="${song.artist.name}" onClick="showLyrics()" class="btn btn-success">Get Lyrics</button>
+                    </div>
+                </div>  
+            `).join('');
 
-    searchResult.innerHTML = singleResult;
+            searchResult.innerHTML = singleResult;
+            document.querySelector('.single-lyrics').style.display = "none";
+        }  
+        else {
+            songTitle.innerText = 'No Search Result Found';
+            document.querySelector('.single-lyrics').style.display = "none";
+
+        }
+    }
+    catch {
+        songTitle.innerText = 'No Search Result Found';
+        document.querySelector('.single-lyrics').style.display = "none";
+        document.getElementById('search-error').innerText = "No Search Results Found";
+    }
 }
 
 
 // get lyrics button event handler function
-function showLyrics() {
+async function showLyrics() {
     const artist = event.target.dataset.artist;
     const title = event.target.dataset.title;
-    console.log(artist, title);
-    
     songTitle.innerText = title;
-    songLyric.innerText = getLyrics(artist, title).lyrics;
-    console.log(getLyrics(artist, title).lyrics);
-}
+    
+    try{
+        const response = await fetch(`https://api.lyrics.ovh/v1/'${artist}/${title}`);
+        const data = await response.json();    
 
-async function getLyrics(artist, title) {
-    const response = await fetch(`https://api.lyrics.ovh/v1/'${artist}/${title}`);
-    const data = await response.json();
-    return data;
+        songLyric.innerHTML = data.lyrics.replace(new RegExp(",","g"), "<br>");
+        document.querySelector('.single-lyrics').style.display = "block";
+    }
+    catch {
+        songLyric.innerText = 'No Lyrics Found';
+        document.querySelector('.single-lyrics').style.display = "block";
+    }
 }
