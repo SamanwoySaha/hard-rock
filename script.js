@@ -2,7 +2,6 @@ const searchInput = document.getElementById('search-term');
 const searchBtn = document.getElementById('search-btn');
 const searchResult = document.getElementById('search-result');
 const searchError = document.getElementById('search-error');
-
 const songInfo = document.getElementById('song-info');
 const songTitle = document.getElementById('song-title');
 const songLyric = document.getElementById('song-lyric');
