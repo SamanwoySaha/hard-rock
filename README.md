@@ -14,5 +14,7 @@ A Song Lyric Finder Web Application which finds any song according to it's input
 - Bootstrap 4
 - Html5
 - Css3
+- Javascript
+- ES6
 - API
 
